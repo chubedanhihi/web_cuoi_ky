@@ -1,0 +1,69 @@
+/* profile.css */
+
+/* Background nhẹ cho toàn trang */
+body {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card thông tin cá nhân */
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Tiêu đề */
+h2 {
+  color: #dc3545; /* Màu đỏ SHOPKO */
+  font-weight: 700;
+}
+
+/* Các dòng thông tin */
+.card p {
+  font-size: 1rem;
+  color: #495057;
+  margin-bottom: 0.8rem;
+}
+
+.card p strong {
+  color: #343a40;
+}
+
+/* Nút chỉnh sửa */
+.card .btn-primary {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.card .btn-primary:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Footer cố định */
+footer {
+  margin-top: auto;
+  background-color: #343a40;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive cho card */
+@media (max-width: 576px) {
+  .card {
+    padding: 15px;
+  }
+}

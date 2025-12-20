@@ -1,0 +1,132 @@
+/* style.css */
+
+/* BODY & LAYOUT */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* đảm bảo body cao tối thiểu bằng viewport */
+}
+.carousel-inner img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover; /* thay vì cover */
+  background-color: #000; /* nếu ảnh nhỏ sẽ có viền nền */
+}
+
+/* Phần nội dung chính */
+main {
+  flex: 1; /* nội dung chiếm hết không gian còn lại */
+}
+
+/* Footer */
+footer {
+  flex-shrink: 0; /* không bị co lại */
+}
+
+/* TEXT & EFFECTS */
+.gradient-text {
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* PRODUCT CARD */
+.product-card img {
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* BUTTONS */
+.btn-buy-now {
+  background: #ff4d4f;
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-buy-now:hover {
+  background: #e6393a;
+  color: #fff;
+}
+
+.btn-add-cart {
+  background: #198754;
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-add-cart:hover {
+  background: #157347;
+  color: #fff;
+}
+
+/* INPUT QUANTITY */
+.qty-box {
+  width: 70px;
+}
+
+/* Tawk.to CHAT WIDGET */
+#tawkchat-container {
+  z-index: 99999 !important;
+  position: fixed !important;
+  bottom: 0;
+  right: 0;
+}
+/*check out*/
+.payment-box {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+}
+
+#shippingDisplay {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#grandTotal {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #e74c3c;
+}
+/* ===== BUTTON CONFIRM RECEIVED ===== */
+.btn-confirm-received {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: none;
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
+  transition: all 0.3s ease;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-confirm-received i {
+  font-size: 18px;
+}
+
+/* Hover */
+.btn-confirm-received:hover {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(22, 163, 74, 0.45);
+  color: #fff;
+}
