@@ -5,7 +5,7 @@ require 'model/product_db.php';
 require 'model/category_db.php';
 
 // Lấy tất cả sản phẩm
-$products = get_all_products();
+$products = get_4_cheapest_products();
 
 // Lấy thông tin người dùng nếu đăng nhập
 $user = null;
@@ -138,11 +138,16 @@ if (isset($_SESSION['user_id'])) {
         </h2>
         <?php if (!empty($products)): ?>
         <div class="row g-4">
-            <?php foreach ($products as $row): 
-            $final_price = $row['listPrice'] * (1 - $row['discountPercent']/100);
-            $image_src = !empty($row['image']) ? htmlspecialchars($row['image']) : 'images/no-image.jpg';
+            <?php 
+$count = 0;
+foreach ($products as $row): 
+    if ($count == 4) break;
+    $count++;
 
-        ?>
+    $final_price = $row['listPrice'] * (1 - $row['discountPercent']/100);
+    $image_src = !empty($row['image']) ? htmlspecialchars($row['image']) : 'images/no-image.jpg';
+?>
+
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="card product-card h-100 shadow-sm border-0 position-relative overflow-hidden">
                     <div class="ratio ratio-1x1">

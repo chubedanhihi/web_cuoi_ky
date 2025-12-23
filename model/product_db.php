@@ -151,4 +151,16 @@ function delete_product($product_id) {
 
     return $success;
 }
+
+function get_4_cheapest_products() {
+    global $conn;
+    $sql = "SELECT p.*, c.categoryName
+            FROM products p
+            LEFT JOIN categories c ON p.categoryID = c.categoryID
+            ORDER BY p.listPrice ASC
+            LIMIT 4";
+    $result = $conn->query($sql);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+}
+
 ?>
