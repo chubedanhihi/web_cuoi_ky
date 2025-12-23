@@ -185,12 +185,13 @@ if (isset($_SESSION['user_id'])) {
 
                     <hr class="my-5">
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="radio" name="payment" value="cod" id="cod" checked>
-                        <label class="form-check-label fw-bold" for="cod">Thanh toán khi nhận hàng (COD)</label>
+                        <input class="form-check-input" type="radio" name="payment_method" value="COD" checked>
+                        <label class="form-check-label fw-bold">Thanh toán khi nhận hàng (COD)</label>
                     </div>
                     <div class="form-check mb-4">
-                        <input class="form-check-input" type="radio" name="payment" value="bank">
-                        <label class="form-check-label">Chuyển khoản / Momo / VNPay</label>
+                        <input class="form-check-input" type="radio" name="payment_method" value="QR">
+                        <label class="form-check-label">Thanh toán bằng mã QR (Chuyển khoản)</label>
+
                     </div>
 
                     <button type="submit" class="btn btn-danger btn-lg w-100 fw-bold py-3">HOÀN TẤT ĐẶT HÀNG</button>

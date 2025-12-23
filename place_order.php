@@ -13,7 +13,8 @@ $phone     = trim($_POST['phone'] ?? '');
 $email     = trim($_POST['email'] ?? '');
 $address   = trim($_POST['address'] ?? '');
 $note      = trim($_POST['note'] ?? '');
-$payment   = strtoupper($_POST['payment'] ?? 'COD');
+$payment = strtoupper($_POST['payment_method'] ?? 'COD');
+
 
 $total_all    = (int)($_POST['total_all'] ?? 0);
 $shipping_fee = (int)($_POST['shipping_fee'] ?? 0);
@@ -35,32 +36,40 @@ if ($fullname === '' || $phone === '' || $address === '' || empty($product_ids))
 $order_code = 'DH' . date('YmdHis') . rand(100, 999);
 $cod_amount = ($payment === 'COD') ? $grand_total : 0;
 $status     = 'pending'; // ✅ KHAI BÁO BIẾN TRƯỚC (FIX LỖI)
+$payment_status = 'unpaid';
+
+if ($payment === 'QR') {
+    $status = 'pending';          // chờ thanh toán
+    $payment_status = 'unpaid';
+}
 
 /* ================== LƯU ORDERS ================== */
 $stmt = $conn->prepare("
     INSERT INTO orders (
         user_id, order_code, customer_name, customer_phone, customer_email,
         customer_address, payment_method, total_amount, shipping_fee,
-        grand_total, cod_amount, order_status, note
-    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+        grand_total, cod_amount, order_status, payment_status, note
+    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 ");
 
 $stmt->bind_param(
-    "issssssdiidss",
-    $user_id,
-    $order_code,
-    $fullname,
-    $phone,
-    $email,
-    $address,
-    $payment,
-    $total_all,
-    $shipping_fee,
-    $grand_total,
-    $cod_amount,
-    $status,
-    $note
+    "issssssdiidsss",
+    $user_id,          // i
+    $order_code,       // s
+    $fullname,         // s
+    $phone,            // s
+    $email,            // s
+    $address,          // s
+    $payment,          // s
+    $total_all,        // d (decimal)
+    $shipping_fee,     // i
+    $grand_total,      // i
+    $cod_amount,       // d
+    $status,           // s
+    $payment_status,   // s
+    $note              // s
 );
+
 
 $stmt->execute();
 $order_id = $stmt->insert_id;
@@ -153,5 +162,10 @@ if (isset($result['code']) && $result['code'] === 200) {
 $_SESSION['last_order_code'] = $order_code;
 $_SESSION['tracking_code']  = $tracking_code ?? '';
 
-header("Location: order_success.php?order_id=$order_id");
-exit;
+if ($payment === 'QR') {
+    header("Location: qr_payment.php?order_id=$order_id");
+    exit;
+} else {
+    header("Location: order_success.php?order_id=$order_id");
+    exit;
+}
